@@ -14,6 +14,8 @@ def poker_hand(hand)
   if suites.all? {|x| x == suites[0]}
     puts "true"
     result = result + " flush"
+  elsif numbers.count(numbers[1]) + numbers.count(numbers[3]) == 5
+    result = "full-house"
   elsif numbers.uniq.length == 4
     result = "two of a kind"
   elsif numbers.uniq.length == 3
@@ -21,8 +23,7 @@ def poker_hand(hand)
   elsif numbers.uniq.length == 2
     result = "four of a kind"
   end
-  puts numbers.uniq.length
   result.strip
 end
 
-poker_hand(['9C', '9D', 'KH', 'QC', 'AC'])
+poker_hand(['9C', '3D', '3H', '3C', '3C'])

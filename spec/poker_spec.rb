@@ -26,4 +26,7 @@ describe "poker_hand" do
   it "recognizes 4 of a kind" do
     poker_hand(['9C', '9D', '9H', '9C', '10C']).should eql "four of a kind"
   end
+  it "recognizes a full-house" do
+    poker_hand(['9C', '9D', '9H', 'KC', 'KC']).should eql "full-house"
+  end
 end
