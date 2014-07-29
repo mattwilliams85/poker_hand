@@ -1,29 +1,29 @@
 def poker_hand(hand)
-  numbers = []
+  values = []
   suites = []
   result = ""
   hand.each do |card|
-    ## Converts face-cards to numbers and seperates card value and suite into seperate arrays ##
-    numbers << card.gsub(/["JKQA"]/,'J'=>'11','Q'=>'12','K'=>'13','A'=>'14').to_i
+    ## Converts face-cards to values and seperates card value and suite into seperate arrays ##
+    values << card.gsub(/["JKQA"]/,'J'=>'11','Q'=>'12','K'=>'13','A'=>'14').to_i
     suites << card.slice(-1)
   end
   ## Sorts the card values in descending order ##
-  numbers.sort!.reverse!
+  values.sort!.reverse!
 
-  if numbers[0]-4 == numbers[4] && numbers.uniq.length == 5
+  if values[0]-4 == values[4] && values.uniq.length == 5
     result = "straight"
   end
-  if numbers.count(numbers[1]) + numbers.count(numbers[3]) == 5
+  if values.count(values[1]) + values.count(values[3]) == 5
     result = "full-house"
-  elsif numbers.uniq.length == 4
+  elsif values.uniq.length == 4
     result = "two of a kind"
-  elsif numbers.uniq.length == 3
-    if numbers.count(numbers[0]) == 2 || numbers.count(numbers[1]) == 2
+  elsif values.uniq.length == 3
+    if values.count(values[0]) == 2 || values.count(values[1]) == 2
       result = "two pair"
     else
       result = "three of a kind"
     end
-  elsif numbers.uniq.length == 2
+  elsif values.uniq.length == 2
     result = "four of a kind"
   end
 
@@ -31,7 +31,7 @@ def poker_hand(hand)
     result = result + " flush"
   end
 
-  if result == "straight flush" && (numbers.reduce :+) == 60
+  if result == "straight flush" && (values.reduce :+) == 60
     "royal flush"
   else
     result.strip
