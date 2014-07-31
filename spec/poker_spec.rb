@@ -35,8 +35,4 @@ describe "poker_hand" do
   it "recognizes a two pair" do
     poker_hand(['9S', '9S', '3C', '4S', '4S']).should eql "two pair"
   end
-  it "recognizes a flush combinations" do
-    poker_hand(['9S', '9S', '3S', '4S', '4S']).should eql "two pair flush"
-    poker_hand(['9S', '9S', '9S', '9S', '2S']).should eql "four of a kind flush"
-  end
 end

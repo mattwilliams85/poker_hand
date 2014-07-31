@@ -3,16 +3,20 @@ def poker_hand(hand)
   suites = []
   result = ""
   hand.each do |card|
-    ## Converts face-cards to values and seperates card value and suite into seperate arrays ##
     values << card.gsub(/["JKQA"]/,'J'=>'11','Q'=>'12','K'=>'13','A'=>'14').to_i
     suites << card.slice(-1)
   end
-  ## Sorts the card values in descending order ##
+
   values.sort!.reverse!
 
   if values[0]-4 == values[4] && values.uniq.length == 5
     result = "straight"
   end
+
+  if suites.all? {|x| x == suites[0]}
+    result = result + " flush"
+  end
+
   if values.count(values[1]) + values.count(values[3]) == 5
     result = "full-house"
   elsif values.uniq.length == 4
@@ -25,10 +29,6 @@ def poker_hand(hand)
     end
   elsif values.uniq.length == 2
     result = "four of a kind"
-  end
-
-  if suites.all? {|x| x == suites[0]}
-    result = result + " flush"
   end
 
   if result == "straight flush" && (values.reduce :+) == 60
